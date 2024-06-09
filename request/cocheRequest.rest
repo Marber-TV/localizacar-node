@@ -1,0 +1,39 @@
+GET http://localhost:3000/api/coches/{matricula}
+###
+
+GET http://localhost:3000/api/coches/ABC-1234
+###
+
+POST http://localhost:3000/api/coches
+Content-Type: application/json
+
+{
+    "matricula": "XYZ-9876",
+    "marca": "Toyota",
+    "color": "Rojo"
+}
+
+###
+
+PUT http://localhost:3000/api/coches/{matricula}
+Content-Type: application/json
+
+{
+    "marca": "Toyota",
+    "color": "Negro"
+}
+###
+
+PUT http://localhost:3000/api/coches/XYZ-9876
+Content-Type: application/json
+
+{
+    "marca": "Toyota",
+    "color": "Negro"
+}
+###
+
+DELETE http://localhost:3000/api/coches/{matricula}
+###
+
+DELETE http://localhost:3000/api/coches/XYZ-9876

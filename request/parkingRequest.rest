@@ -1,0 +1,17 @@
+GET http://localhost:3000/api/parking
+###
+GET http://localhost:3000/api/parking/
+###
+POST http://localhost:3000/api/parking
+Content-Type: application/json
+
+{
+    "latitude": 34.0522,
+    "longitude": -118.2437,
+    "usermail": "john.doe@example.com"
+}
+###
+GET http://localhost:3000/api/parking/1
+###
+DELETE http://localhost:3000/api/parking/10
+

@@ -1,0 +1,17 @@
+GET http://localhost:3000/api/user
+
+###
+GET http://localhost:3000/api/user/
+
+###
+POST http://localhost:3000/api/user
+Content-Type: application/json
+
+{
+    "usermail": "john.doe@example.com",
+    "userpassword": "securepassword123"
+}
+
+
+###
+DELETE http://localhost:3000/api/user/john.doe@example.com
