@@ -1,15 +1,15 @@
-const mysql = require('mysql');
+const { Pool } = require('pg');
 
 const dbConfig = {
-    host: 'localhost',
-    user: 'root',
-    password: 'test',
-    database: 'Localizacar',
-    port: 3366};
+    connectionString: 'postgres://u806htc6eqbi4v:pbbd75b1deec5a78024760fa69171d3cf59ca21903040bf5b9af9bce48c30e44e@cav8p52l9arddb.cluster-czz5s0kz4scl.eu-west-1.rds.amazonaws.com:5432/d7vd377320nl6h',
+    ssl: {
+        rejectUnauthorized: false
+    }
+};
 
-const db = mysql.createConnection(dbConfig);
+const pool = new Pool(dbConfig);
 
-db.connect(err => {
+pool.connect(err => {
     if (err) {
         console.error('Error al conectar a la base de datos:', err);
     } else {
@@ -17,4 +17,4 @@ db.connect(err => {
     }
 });
 
-module.exports = db;
+module.exports = pool;
