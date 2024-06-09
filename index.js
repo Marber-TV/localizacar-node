@@ -1,15 +1,23 @@
-// Importar librería express --> web server
+// Importar librerías
 const express = require('express');
-// Importar librería path, para manejar rutas de ficheros en el servidor
 const path = require('path');
-// Importar libreria CORS
 const cors = require('cors');
+const { createGlobalProxyAgent } = require('global-agent');
+
+// Configurar el proxy global utilizando la URL de Fixie
+const fixieUrl = process.env.FIXIE_URL;
+if (fixieUrl) {
+  process.env.GLOBAL_AGENT_HTTP_PROXY = fixieUrl;
+  process.env.GLOBAL_AGENT_HTTPS_PROXY = fixieUrl;
+  createGlobalProxyAgent();
+}
+
 // Importar gestores de rutas
 const userRoutes = require('./routes/userRoutes');
 const parkingRoutes = require('./routes/parkingRoutes');
 const cocheRoutes = require('./routes/cocheRoutes');
-const grupoRoutes = require('./routes/grupoRoutes'); // Importa las rutas de grupos
-const userCarRoutes = require('./routes/carUserRoutes'); // Importa las rutas de userCar
+const grupoRoutes = require('./routes/grupoRoutes');
+const userCarRoutes = require('./routes/carUserRoutes');
 const grupoUsuarioRoutes = require('./routes/grupoUsuarioRoutes');
 
 const app = express();
@@ -24,7 +32,7 @@ app.use(cors());
 app.use('/api/user', userRoutes);
 app.use('/api/parking', parkingRoutes);
 app.use('/api/coches', cocheRoutes);
-app.use('/api/grupos', grupoRoutes); 
+app.use('/api/grupos', grupoRoutes);
 app.use('/api', userCarRoutes);
 app.use('/api/grupo-usuarios', grupoUsuarioRoutes);
 
@@ -40,3 +48,24 @@ app.get('/', (req, res) => {
 app.listen(port, () => {
   console.log(`Servidor escuchando en el puerto ${port}`);
 });
+
+const { Pool } = require('pg');
+
+const dbConfig = {
+    connectionString: process.env.DATABASE_URL,
+    ssl: {
+        rejectUnauthorized: false
+    }
+};
+
+const pool = new Pool(dbConfig);
+
+pool.connect(err => {
+    if (err) {
+        console.error('Error al conectar a la base de datos:', err);
+    } else {
+        console.log('Conexión exitosa a la base de datos');
+    }
+});
+
+module.exports = pool;
