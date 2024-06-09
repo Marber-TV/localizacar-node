@@ -12,7 +12,6 @@ const grupoRoutes = require('./routes/grupoRoutes'); // Importa las rutas de gru
 const userCarRoutes = require('./routes/carUserRoutes'); // Importa las rutas de userCar
 const grupoUsuarioRoutes = require('./routes/grupoUsuarioRoutes');
 
-const request = require('request'); // Importar librería request para manejar las solicitudes
 const app = express();
 const port = process.env.PORT || 3000;
 
@@ -35,23 +34,6 @@ app.use(express.static(path.join(__dirname, 'public')));
 // Ruta para manejar las solicitudes al archivo index.html
 app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, 'public', 'index.html'));
-});
-
-// Ejemplo de uso de Fixie para solicitudes salientes
-app.get('/external-api', (req, res) => {
-  const fixieUrl = process.env.FIXIE_URL;
-  const options = {
-    url: 'http://example.com/api', // Cambia la URL según sea necesario
-    proxy: fixieUrl,
-  };
-
-  request(options, (error, response, body) => {
-    if (error) {
-      res.status(500).send(error.message);
-    } else {
-      res.send(body);
-    }
-  });
 });
 
 // Iniciar el servidor
