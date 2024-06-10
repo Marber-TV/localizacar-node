@@ -1,4 +1,3 @@
-// models/grupoUsuarioModel.js
 const db = require('../config/dbConfig');
 const { logMensaje } = require('../utils/logger');
 
@@ -7,14 +6,14 @@ class GrupoUsuarioModel {
         const query = `
             SELECT COUNT(*) AS count
             FROM grupousuarios
-            WHERE grupo_id = ? AND usermail = ?
+            WHERE grupo_id = $1 AND usermail = $2
         `;
         db.query(query, [grupoId, usermail], (err, results) => {
             if (err) {
                 logMensaje('Error en isUsuarioInGrupo:', err);
                 return callback(err, null);
             }
-            const isInGroup = results[0].count > 0;
+            const isInGroup = results.rows[0].count > 0;
             callback(null, isInGroup);
         });
     }
@@ -22,7 +21,7 @@ class GrupoUsuarioModel {
     static addUsuarioToGrupo(grupoId, usermail, callback) {
         const query = `
             INSERT INTO grupousuarios (grupo_id, usermail)
-            VALUES (?, ?)
+            VALUES ($1, $2)
         `;
         db.query(query, [grupoId, usermail], (err, results) => {
             if (err) {
@@ -36,7 +35,7 @@ class GrupoUsuarioModel {
     static removeUsuarioFromGrupo(grupoId, usermail, callback) {
         const query = `
             DELETE FROM grupousuarios
-            WHERE grupo_id = ? AND usermail = ?
+            WHERE grupo_id = $1 AND usermail = $2
         `;
         db.query(query, [grupoId, usermail], (err, results) => {
             if (err) {
@@ -52,14 +51,14 @@ class GrupoUsuarioModel {
             SELECT g.*
             FROM grupos g
             JOIN grupousuarios gu ON g.id = gu.grupo_id
-            WHERE gu.usermail = ?
+            WHERE gu.usermail = $1
         `;
         db.query(query, [usermail], (err, results) => {
             if (err) {
                 logMensaje('Error en getGruposByUser:', err);
                 return callback(err, null);
             }
-            callback(null, results);
+            callback(null, results.rows);
         });
     }
 }

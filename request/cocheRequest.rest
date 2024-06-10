@@ -1,10 +1,10 @@
-GET http://localhost:3000/api/coches/{matricula}
+GET https://www.localizacar.info/api/coches/{matricula}
 ###
 
-GET http://localhost:3000/api/coches/ABC-1234
+GET https://www.localizacar.info/api/coches/ABC-1234
 ###
 
-POST http://localhost:3000/api/coches
+POST https://www.localizacar.info/api/coches
 Content-Type: application/json
 
 {
@@ -15,7 +15,7 @@ Content-Type: application/json
 
 ###
 
-PUT http://localhost:3000/api/coches/{matricula}
+PUT https://www.localizacar.info/api/coches/{matricula}
 Content-Type: application/json
 
 {
@@ -24,7 +24,7 @@ Content-Type: application/json
 }
 ###
 
-PUT http://localhost:3000/api/coches/XYZ-9876
+PUT https://www.localizacar.info/api/coches/XYZ-9876
 Content-Type: application/json
 
 {
@@ -33,7 +33,7 @@ Content-Type: application/json
 }
 ###
 
-DELETE http://localhost:3000/api/coches/{matricula}
+DELETE https://www.localizacar.info/api/coches/{matricula}
 ###
 
-DELETE http://localhost:3000/api/coches/XYZ-9876
+DELETE https://www.localizacar.info/api/coches/XYZ-9876
