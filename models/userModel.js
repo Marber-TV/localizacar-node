@@ -4,19 +4,19 @@ const UserCarModel = require('./userCarModel'); // Importar el modelo intermedio
 
 class UserModel {
     getAllUsers(callback) {
-        const query = 'SELECT * FROM user';
+        const query = 'SELECT * FROM "user"';
         db.query(query, (err, result) => {
             if (err) {
                 logErrorSQL(err);
                 callback(err, null);
             } else {
-                callback(null, result);
+                callback(null, result.rows);
             }
         });
     }
 
     createUser(userData, callback) {
-        const query = 'INSERT INTO user (usermail, userpassword) VALUES (?, ?)';
+        const query = 'INSERT INTO "user" (usermail, userpassword) VALUES ($1, $2)';
         const values = [userData.usermail, userData.userpassword];
 
         db.query(query, values, (err, result) => {
@@ -30,19 +30,19 @@ class UserModel {
     }
     
     getUserByEmail(userEmail, callback) {
-        const query = 'SELECT * FROM user WHERE usermail = ? LIMIT 1';
+        const query = 'SELECT * FROM "user" WHERE usermail = $1 LIMIT 1';
         db.query(query, [userEmail], (err, results) => {
             if (err) {
                 logErrorSQL(err);
                 callback(err, null);
             } else {
-                callback(null, results[0]);
+                callback(null, results.rows[0]);
             }
         });
     }
 
     deleteUserByEmail(userEmail, callback) {
-        const query = 'DELETE FROM user WHERE usermail = ?';
+        const query = 'DELETE FROM "user" WHERE usermail = $1';
         db.query(query, [userEmail], (err, result) => {
             if (err) {
                 logErrorSQL(err);
