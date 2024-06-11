@@ -4,25 +4,31 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>Localizacar - Home</title>
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <style>
         body, html {
             height: 100%;
             margin: 0;
+            font-family: 'Arial', sans-serif;
+            background-color: #300054; /* Background color for the entire page */
+            color: white; /* Default text color for the entire page */
+            scroll-behavior: smooth; /* Smooth scrolling */
         }
 
         .bg {
-            /* Imagen de fondo */
-            background-image: url('localizacar.png');
-            height: 100%; 
+            /* Background GIF */
+            position: relative;
+            height: 100vh;
+            background-image: url('background.gif');
+            background-size: cover;
             background-position: center;
             background-repeat: no-repeat;
-            background-size: cover;
-            background-color: white;
         }
 
         .content {
-            background-color: rgba(0, 0, 0, 0.7); /* Fondo semi-transparente */
+            background-color: rgba(0, 0, 0, 0.7);
             color: white;
             padding: 40px;
             text-align: center;
@@ -35,14 +41,14 @@
         }
 
         .btn-custom {
-            background-color: black;
+            background-color: #520092;
             color: white;
             transition: all 0.3s ease;
         }
 
         .btn-custom:hover {
-            background-color: white;
-            color: black;
+            background-color: #3e006d;
+            color: white;
             transform: scale(1.1);
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
         }
@@ -66,18 +72,122 @@
                 font-size: 1.25rem;
             }
         }
+
+        .section {
+            text-align: center;
+            padding: 60px 20px; /* Increased padding */
+            background-color: #300054; /* Background color for the sections */
+            color: white; /* Text color for the sections */
+            opacity: 0; /* Start hidden */
+            transition: opacity 1s ease-in-out; /* Smooth transition */
+        }
+
+        .visible {
+            opacity: 1; /* Show when visible */
+        }
+
+        .split-section {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .split-section .text, .split-section .image {
+            flex: 1 1 50%;
+            max-width: 50%;
+            padding: 20px;
+        }
+
+        .split-section img {
+            width: 100%;
+            height: auto;
+            border-radius: 10px;
+        }
+
+        @media (max-width: 768px) {
+            .split-section .text, .split-section .image {
+                max-width: 100%;
+                flex: 1 1 100%;
+            }
+        }
+
+        .about {
+            text-align: left;
+        }
+
+        .about-icons {
+            margin-top: 20px;
+        }
+
+        .about-icons a {
+            color: #520092;
+            font-size: 1.5rem;
+            margin-right: 15px;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .about-icons a:hover {
+            color: #3e006d;
+        }
     </style>
 </head>
 <body>
     <div class="bg">
         <div class="content">
             <h1>Localizacar</h1>
-            <p>La solución para que nunca más pierdas tu coche.</p>
-            <p><a href="localizacar.apk" class="btn btn-custom btn-lg" role="button" download="localizacar.apk">Descargar Localizacar App</a></p>        </div>
+            <p>The solution so you never lose your car again.</p>
+            <p><a href="localizacar.apk" class="btn btn-custom btn-lg" role="button" download="localizacar.apk">Download Localizacar App</a></p>
+        </div>
+    </div>
+
+    <div class="section split-section testimonials">
+        <div class="text">
+            <h2>What Our Users Say</h2>
+            <p>"Localizacar has changed my life! I never worry about finding my car anymore."</p>
+            <p>- Jane Doe</p>
+            <p>"The best app for car tracking. Simple and reliable!"</p>
+            <p>- John Smith</p>
+        </div>
+        <div class="image">
+            <img src="localizacar.jpg" alt="Localizacar App Screenshot">
+        </div>
+    </div>
+
+    <div class="section features">
+        <h2>Key Features</h2>
+        <p>Real-time car location tracking</p>
+        <p>User-friendly interface</p>
+        <p>Alerts and notifications</p>
+    </div>
+
+    <div class="section about">
+        <h2>About</h2>
+        <p>Hi, I'm [Your Name], the creator of Localizacar. I'm passionate about creating solutions that make life easier and more efficient. Connect with me on social media and follow my journey.</p>
+        <div class="about-icons">
+            <a href="https://www.linkedin.com/in/yourprofile" target="_blank"><i class="fab fa-linkedin"></i></a>
+            <a href="https://twitter.com/yourprofile" target="_blank"><i class="fab fa-twitter"></i></a>
+            <a href="https://github.com/yourprofile" target="_blank"><i class="fab fa-github"></i></a>
+        </div>
+        <p>&copy; 2024 Localizacar. All rights reserved.</p>
     </div>
 
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $(window).on('scroll', function () {
+                var scrollPos = $(window).scrollTop();
+                $('.section').each(function () {
+                    var sectionOffset = $(this).offset().top - $(window).height() / 1.5;
+                    if (scrollPos > sectionOffset) {
+                        $(this).addClass('visible');
+                    }
+                });
+            });
+        });
+    </script>
 </body>
 </html>
