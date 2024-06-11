@@ -34,19 +34,21 @@ class GrupoModel {
     }
 
     createGrupo(grupoData, callback) {
-        const query = 'INSERT INTO grupos (nombre, descripcion) VALUES ($1, $2)';
+        const query = 'INSERT INTO grupos (nombre, descripcion) VALUES ($1, $2) RETURNING id';
         const values = [grupoData.nombre, grupoData.descripcion];
-
+    
         db.query(query, values, (err, result) => {
             if (err) {
                 logErrorSQL(err);
                 console.error('Error in createGrupo:', err);
                 callback(err, null);
             } else {
-                callback(null, result);
+                const grupoId = result.rows[0].id;
+                callback(null, { grupoId });
             }
         });
     }
+    
     
     addCocheToGrupo(grupoId, matricula, callback) {
         const query = 'INSERT INTO grupocoches (grupo_id, matricula) VALUES ($1, $2)';

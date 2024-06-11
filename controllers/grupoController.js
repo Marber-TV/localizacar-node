@@ -52,7 +52,7 @@ class GrupoController {
                 return res.status(500).json(Respuesta.error(null, 'Error al crear el grupo'));
             }
 
-            const grupoId = result.insertId;
+            const grupoId = result.grupoId;
             logMensaje(`Grupo creado con ID: ${grupoId}, agregando usuario: ${usermail}`);
             GrupoUsuarioModel.addUsuarioToGrupo(grupoId, usermail, (err) => {
                 if (err) {
@@ -60,15 +60,20 @@ class GrupoController {
                     return res.status(500).json(Respuesta.error(null, 'Error al agregar el usuario al grupo'));
                 }
 
-                logMensaje(`Agregando coche con matricula: ${coche} al grupo con ID: ${grupoId}`);
-                GrupoModel.addCocheToGrupo(grupoId, coche, (err) => {
-                    if (err) {
-                        logMensaje('Error al agregar el coche al grupo:', err);
-                        return res.status(500).json(Respuesta.error(null, 'Error al agregar el coche al grupo'));
-                    }
+                if (coche) {
+                    logMensaje(`Agregando coche con matricula: ${coche} al grupo con ID: ${grupoId}`);
+                    GrupoCocheModel.addCocheToGrupo(grupoId, coche, (err) => {
+                        if (err) {
+                            logMensaje('Error al agregar el coche al grupo:', err);
+                            return res.status(500).json(Respuesta.error(null, 'Error al agregar el coche al grupo'));
+                        }
+                        logMensaje('Grupo creado y usuario añadido con éxito');
+                        res.status(201).json(Respuesta.exito({ id: grupoId, nombre, descripcion, coche }, 'Grupo creado y usuario añadido'));
+                    });
+                } else {
                     logMensaje('Grupo creado y usuario añadido con éxito');
-                    res.status(201).json(Respuesta.exito({ id: grupoId, nombre, descripcion, coche }, 'Grupo creado y usuario añadido'));
-                });
+                    res.status(201).json(Respuesta.exito({ id: grupoId, nombre, descripcion }, 'Grupo creado y usuario añadido'));
+                }
             });
         });
     }
