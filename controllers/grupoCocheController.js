@@ -8,13 +8,17 @@ class GrupoCocheController {
         const { matricula } = req.body;
 
         if (!matricula) {
+            logMensaje('Matricula es requerido');
             return res.status(400).json(Respuesta.error(null, 'matricula es requerido'));
         }
 
+        logMensaje(`Agregando coche con matricula ${matricula} al grupo ${grupoId}`);
         GrupoCocheModel.addCocheToGrupo(grupoId, matricula, (err, result) => {
             if (err) {
+                logMensaje('Error al agregar el coche al grupo:', err);
                 return res.status(500).json(Respuesta.error(null, 'Error al agregar el coche al grupo'));
             }
+            logMensaje('Coche agregado al grupo:', { grupoId, matricula });
             res.status(201).json(Respuesta.exito({ grupoId, matricula }, 'Coche agregado al grupo'));
         });
     }
@@ -24,13 +28,17 @@ class GrupoCocheController {
         const { matricula } = req.body;
 
         if (!matricula) {
+            logMensaje('Matricula es requerido');
             return res.status(400).json(Respuesta.error(null, 'matricula es requerido'));
         }
 
+        logMensaje(`Eliminando coche con matricula ${matricula} del grupo ${grupoId}`);
         GrupoCocheModel.removeCocheFromGrupo(grupoId, matricula, (err, result) => {
             if (err) {
+                logMensaje('Error al eliminar el coche del grupo:', err);
                 return res.status(500).json(Respuesta.error(null, 'Error al eliminar el coche del grupo'));
             }
+            logMensaje('Coche eliminado del grupo:', { grupoId, matricula });
             res.status(204).end();
         });
     }

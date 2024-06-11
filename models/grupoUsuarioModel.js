@@ -11,6 +11,7 @@ class GrupoUsuarioModel {
         db.query(query, [grupoId, usermail], (err, results) => {
             if (err) {
                 logMensaje('Error en isUsuarioInGrupo:', err);
+                console.error('Error details:', err);
                 return callback(err, null);
             }
             const isInGroup = results.rows[0].count > 0;
@@ -26,6 +27,7 @@ class GrupoUsuarioModel {
         db.query(query, [grupoId, usermail], (err, results) => {
             if (err) {
                 logMensaje('Error en addUsuarioToGrupo:', err);
+                console.error('Error details:', err);
                 return callback(err, null);
             }
             callback(null, results);
@@ -40,6 +42,7 @@ class GrupoUsuarioModel {
         db.query(query, [grupoId, usermail], (err, results) => {
             if (err) {
                 logMensaje('Error en removeUsuarioFromGrupo:', err);
+                console.error('Error details:', err);
                 return callback(err, null);
             }
             callback(null, results);
@@ -56,6 +59,7 @@ class GrupoUsuarioModel {
         db.query(query, [usermail], (err, results) => {
             if (err) {
                 logMensaje('Error en getGruposByUser:', err);
+                console.error('Error details:', err);
                 return callback(err, null);
             }
             callback(null, results.rows);

@@ -7,6 +7,7 @@ class GrupoModel {
         db.query(query, (err, result) => {
             if (err) {
                 logErrorSQL(err);
+                console.error('Error in getAllGrupos:', err);
                 callback(err, null);
             } else {
                 callback(null, result.rows);
@@ -24,6 +25,7 @@ class GrupoModel {
         db.query(query, [usermail], (err, results) => {
             if (err) {
                 logErrorSQL(err);
+                console.error('Error in getGruposByUser:', err);
                 callback(err, null);
             } else {
                 callback(null, results.rows);
@@ -38,6 +40,7 @@ class GrupoModel {
         db.query(query, values, (err, result) => {
             if (err) {
                 logErrorSQL(err);
+                console.error('Error in createGrupo:', err);
                 callback(err, null);
             } else {
                 callback(null, result);
@@ -50,6 +53,7 @@ class GrupoModel {
         db.query(query, [grupoId, matricula], (err, result) => {
             if (err) {
                 logErrorSQL(err);
+                console.error('Error in addCocheToGrupo:', err);
                 callback(err, null);
             } else {
                 callback(null, result);
@@ -62,6 +66,7 @@ class GrupoModel {
         db.query(query, [grupoId], (err, results) => {
             if (err) {
                 logErrorSQL(err);
+                console.error('Error in getGrupoById:', err);
                 callback(err, null);
             } else {
                 callback(null, results.rows[0]);
@@ -74,6 +79,7 @@ class GrupoModel {
         db.query(query, [grupoId], (err, result) => {
             if (err) {
                 logErrorSQL(err);
+                console.error('Error in deleteGrupoById:', err);
                 callback(err, null);
             } else {
                 callback(null, result);
@@ -92,6 +98,7 @@ class GrupoModel {
         db.query(query, [usermail], (err, results) => {
             if (err) {
                 logErrorSQL(err);
+                console.error('Error in getGroupCochesByUser:', err);
                 callback(err, null);
             } else {
                 callback(null, results.rows);

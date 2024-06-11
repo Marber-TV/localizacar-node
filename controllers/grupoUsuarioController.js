@@ -4,12 +4,9 @@ const Respuesta = require('../utils/respuesta');
 
 class GrupoUsuarioController {
     getGruposByUser(req, res) {
-        
-        logMensaje(req.query.usermail)
         const usermail = req.query.usermail;
-        
         logMensaje('Parámetro usermail:', usermail);
-        logMensaje(req.query.usermail)
+
         if (!usermail) {
             logMensaje('usermail es requerido');
             return res.status(400).json(Respuesta.error(null, 'usermail es requerido'));
@@ -27,9 +24,7 @@ class GrupoUsuarioController {
         });
     }
 
-
     addUsuarioToGrupo(req, res) {
-        logMensaje('Entrando a addUsuarioToGrupo');
         const grupoId = req.params.grupoId;
         const { usermail } = req.body;
         logMensaje('Parámetros:', { grupoId, usermail });
@@ -39,6 +34,7 @@ class GrupoUsuarioController {
             return res.status(400).json(Respuesta.error(null, 'usermail es requerido'));
         }
 
+        logMensaje(`Verificando si el usuario ${usermail} ya está en el grupo ${grupoId}`);
         GrupoUsuarioModel.isUsuarioInGrupo(grupoId, usermail, (err, isInGroup) => {
             if (err) {
                 logMensaje('Error al verificar la membresía del usuario en el grupo:', err);
@@ -50,6 +46,7 @@ class GrupoUsuarioController {
                 return res.status(400).json(Respuesta.error(null, 'El usuario ya es miembro del grupo'));
             }
 
+            logMensaje(`Agregando usuario ${usermail} al grupo ${grupoId}`);
             GrupoUsuarioModel.addUsuarioToGrupo(grupoId, usermail, (err, result) => {
                 if (err) {
                     logMensaje('Error al agregar el usuario al grupo:', err);
@@ -62,7 +59,6 @@ class GrupoUsuarioController {
     }
 
     removeUsuarioFromGrupo(req, res) {
-        logMensaje('Entrando a removeUsuarioFromGrupo');
         const grupoId = req.params.grupoId;
         const { usermail } = req.body;
         logMensaje('Parámetros:', { grupoId, usermail });
@@ -72,6 +68,7 @@ class GrupoUsuarioController {
             return res.status(400).json(Respuesta.error(null, 'usermail es requerido'));
         }
 
+        logMensaje(`Eliminando usuario ${usermail} del grupo ${grupoId}`);
         GrupoUsuarioModel.removeUsuarioFromGrupo(grupoId, usermail, (err, result) => {
             if (err) {
                 logMensaje('Error al eliminar el usuario del grupo:', err);

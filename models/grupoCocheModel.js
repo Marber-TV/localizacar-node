@@ -7,6 +7,7 @@ class GrupoCocheModel {
         db.query(query, [grupoId, matricula], (err, result) => {
             if (err) {
                 logErrorSQL(err);
+                console.error('Error in addCocheToGrupo:', err);
                 callback(err, null);
             } else {
                 callback(null, result);
@@ -19,6 +20,7 @@ class GrupoCocheModel {
         db.query(query, [grupoId, matricula], (err, result) => {
             if (err) {
                 logErrorSQL(err);
+                console.error('Error in removeCocheFromGrupo:', err);
                 callback(err, null);
             } else {
                 callback(null, result);
@@ -31,6 +33,7 @@ class GrupoCocheModel {
         db.query(query, [grupoId], (err, results) => {
             if (err) {
                 logErrorSQL(err);
+                console.error('Error in getCochesByGroup:', err);
                 callback(err, null);
             } else {
                 callback(null, results.rows);
