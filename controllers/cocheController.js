@@ -9,12 +9,19 @@ class CocheController {
         }
         CocheModel.create(matricula, marca, color, (err) => {
             if (err) {
-                res.status(500).json({ message: "Error al crear el coche" });
+                if (err.code === '23505') { // Código para violación de unicidad
+                    logMensaje('Coche ya existe con matricula:', matricula);
+                    return res.status(400).json({ message: "Coche ya existe con esa matrícula" });
+                } else {
+                    logMensaje('Error al crear el coche:', err);
+                    return res.status(500).json({ message: "Error al crear el coche", error: err.message });
+                }
             } else {
                 // Asociar el coche al usuario
                 UserCarModel.addUserCar(usermail, matricula, (err) => {
                     if (err) {
-                        res.status(500).json({ message: "Error al asociar el coche con el usuario" });
+                        logMensaje('Error al asociar el coche con el usuario:', err);
+                        return res.status(500).json({ message: "Error al asociar el coche con el usuario", error: err.message });
                     } else {
                         res.status(201).json({ message: "Coche creado y asociado exitosamente" });
                     }

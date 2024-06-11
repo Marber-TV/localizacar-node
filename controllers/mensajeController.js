@@ -8,6 +8,7 @@ class MensajeController {
 
         MensajeModel.getMensajesByGrupoId(grupoId, (err, mensajes) => {
             if (err) {
+                logMensaje('Error al recuperar los mensajes del grupo:', err);
                 res.status(500).json(Respuesta.error(null, 'Error al recuperar los mensajes del grupo:' + req.originalUrl));
             } else {
                 res.json(Respuesta.exito(mensajes, 'Listado de mensajes recuperado'));
@@ -24,6 +25,7 @@ class MensajeController {
 
         MensajeModel.createMensaje(mensajeData, (err, result) => {
             if (err) {
+                logMensaje('Error al crear el mensaje:', err);
                 res.status(500).json(Respuesta.error(null, 'Error al crear el mensaje:' + req.originalUrl));
             } else {
                 res.status(201).json(Respuesta.exito(result, 'Mensaje creado exitosamente'));

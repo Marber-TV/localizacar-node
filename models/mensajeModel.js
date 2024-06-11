@@ -15,7 +15,7 @@ class MensajeModel {
     }
 
     createMensaje(mensajeData, callback) {
-        const query = 'INSERT INTO mensajes (contenido, grupo_id, usermail) VALUES ($1, $2, $3)';
+        const query = 'INSERT INTO mensajes (contenido, grupo_id, usermail) VALUES ($1, $2, $3) RETURNING *';
         const values = [mensajeData.contenido, mensajeData.grupoId, mensajeData.usermail];
 
         db.query(query, values, (err, result) => {
@@ -23,7 +23,11 @@ class MensajeModel {
                 logErrorSQL(err);
                 callback(err, null);
             } else {
-                callback(null, { id: result.rows[0].id, ...mensajeData });
+                if (result.rows.length > 0) {
+                    callback(null, { id: result.rows[0].id, ...mensajeData });
+                } else {
+                    callback(new Error('No se pudo crear el mensaje'), null);
+                }
             }
         });
     }
