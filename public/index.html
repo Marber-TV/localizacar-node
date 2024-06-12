@@ -160,7 +160,7 @@
         .honk-title span:nth-child(8) { animation-delay: 0.7s; }
         .honk-title span:nth-child(9) { animation-delay: 0.8s; }
         .honk-title span:nth-child(10) { animation-delay: 0.9s; }
-        .honk-title span:nth-child(11) { animation-delay: 1s; }
+        .honk-title span:nth-child(11) { animation-delay: 0.99s; }
         .swipe-text {
             font-size: 1.25rem;
             margin-top: 20px;
@@ -170,25 +170,69 @@
         .tilt-neon-text {
             text-shadow: 0 0 5px #520092, 0 0 10px #520092, 0 0 20px #520092, 0 0 40px #ff00ff;
         }
+
+        @media (max-width: 768px) {
+            .honk-title span {
+                animation: none;
+            }
+        }
+        .testimonial {
+        margin-bottom: 20px;
+    }
+    .comment, .username, .stars {
+        margin: 0;
+        text-align: left;
+    }
+    .comment {
+        font-weight: bold;
+        text-align: justify;
+    }
+    .username, .stars {
+        padding-left: 20px;
+    }
+    .stars {
+        color: rgb(212, 0, 255);
+    }
+    .features {
+        text-align: center;
+        padding: 20px;
+    }
+    .feature {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: 10px 0;
+    }
+    .feature i {
+        font-size: 24px;
+        margin-right: 10px;
+        color: rgb(212, 0, 255);
+    }
     </style>
 </head>
 <body>
     <div class="bg" id="home">
         <div class="content">
             <h1 class="honk-title" id="title"></h1>
-            <p class="swipe-text tilt-neon-text">The solution so you never lose your car again.</p>
-            <p class="tilt-neon-text"><a href="localizacar.apk" class="btn btn-custom btn-lg swipe-text" role="button" download="localizacar.apk" style="color: white;">Download Localizacar App</a></p>
-            <p class="tilt-neon-text">Swipe to know more about us</p>
+            <p class="swipe-text tilt-neon-text">La solución para que nunca más pierdas tu coche.</p>
+            <p class="tilt-neon-text"><a href="localizacar.apk" class="btn btn-custom btn-lg swipe-text" role="button" download="localizacar.apk" style="color: white;">Descarga Localizacar</a></p>
+            <p class="tilt-neon-text">Baja para conocer mas</p>
         </div>
     </div>
 
     <div class="section split-section testimonials" id="testimonials">
         <div class="text tilt-neon-text">
-            <h2>What Our Users Say</h2>
-            <p>"Localizacar has changed my life! I never worry about finding my car anymore."</p>
-            <p>- Jane Doe</p>
-            <p>"The best app for car tracking. Simple and reliable!"</p>
-            <p>- John Smith</p>
+            <h2>Opiniones de nuestros usuarios</h2>
+            <div class="testimonial">
+                <p class="comment">"Desde que la descargue no he vuelto a perder el coche, el problema ahora es cuando pierdo el movil"</p>
+                <p class="username">- Mercedes Bernabe</p>
+                <p class="stars">★★★★★</p>
+            </div>
+            <div class="testimonial">
+                <p class="comment">"Es muy facil compartir coche y chatear con otros usuarios"</p>
+                <p class="username">- Miguel Guerrero</p>
+                <p class="stars">★★★★★</p>
+            </div>
         </div>
         <div class="image">
             <img src="localizacar.webp" alt="Localizacar App Screenshot">
@@ -197,18 +241,27 @@
 
     <div class="section features" id="features">
         <h2 class="tilt-neon-text">Key Features</h2>
-        <p class="tilt-neon-text">Real-time car location tracking</p>
-        <p class="tilt-neon-text">User-friendly interface</p>
-        <p class="tilt-neon-text">Alerts and notifications</p>
+        <div class="feature">
+            <i class="fas fa-map-marker-alt"></i>
+            <p class="tilt-neon-text mt-3">Servicios de Google Maps</p>
+        </div>
+        <div class="feature">
+            <i class="fas fa-mobile-alt"></i>
+            <p class="tilt-neon-text mt-3">Una interfaz sencilla y facil de usar</p>
+        </div>
+        <div class="feature">
+            <i class="fas fa-users"></i>
+            <p class="tilt-neon-text mt-3">Chatear y compartir coches con otras personas</p>
+        </div>
     </div>
 
     <div class="section about" id="about">
-        <h2>About</h2>
-        <p>Hi, I'm [Your Name], the creator of Localizacar. I'm passionate about creating solutions that make life easier and more efficient. Connect with me on social media and follow my journey.</p>
+        <h2>About Me</h2>
+        <p>Hola, soy Pablo, creador de Localizacar. Me apasiona desarrollar soluciones que faciliten y optimicen la vida de las personas a mi alrededor. Si te ha gustado este proyecto, es probable que también te interesen otros proyectos en los que estoy trabajando.</p>
         <div class="about-icons">
-            <a href="https://www.linkedin.com/in/yourprofile" target="_blank"><i class="fab fa-linkedin"></i></a>
-            <a href="https://twitter.com/yourprofile" target="_blank"><i class="fab fa-twitter"></i></a>
-            <a href="https://github.com/yourprofile" target="_blank"><i class="fab fa-github"></i></a>
+            <a href="https://www.linkedin.com/in/pablo-mart%C3%ADnez-bernab%C3%A9-189b06210/" target="_blank"><i class="fab fa-linkedin"></i></a>
+            <a href="https://x.com/pblmartinezzz" target="_blank"><i class="fab fa-twitter"></i></a>
+            <a href="https://github.com/Marber-TV" target="_blank"><i class="fab fa-github"></i></a>
         </div>
         <p>&copy; 2024 Localizacar. All rights reserved.</p>
     </div>
